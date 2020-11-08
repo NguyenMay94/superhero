@@ -1,0 +1,44 @@
+@import '../abstracts/variables.scss';
+.super-hero-detail {
+    .previous-link {
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        margin: 20px 10px 10px;
+        &:hover {
+            text-decoration: underline;
+        }
+
+        .icon {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+    .super-hero-detail-section {
+        .super-hero--image {
+            img {
+                width: 70%;
+                transform: translate(10px, 10px);
+
+                @media screen and (max-width: 767px) {
+                    width: 50%;
+                    transform: translate(50%, 10px);
+                }
+            }
+        }
+
+        .super-hero--content {
+            padding: 20px;
+            
+            .title {
+                @media screen and (max-width: 767px) {
+                    text-align: center;
+                }
+            }
+
+            .col-title {
+                padding: 5px 10px 0 0;
+            }
+        }
+    }
+}

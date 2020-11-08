@@ -1,0 +1,27 @@
+.btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px 30px;
+    margin: 10px;
+    font-weight: bold;
+
+    &.btn-primary {
+        background-color:#cc2c2c;
+    }
+
+    &.btn-default {
+        background-color: #605d5d;
+    }
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+    &:disabled {
+        color: #ccc;
+        cursor: not-allowed;
+    }
+}

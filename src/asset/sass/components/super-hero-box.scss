@@ -1,0 +1,42 @@
+@import '../abstracts/variables.scss';
+@import '../abstracts/mixins.scss';
+.super-hero-box-section {
+    margin-bottom: 2rem;
+    .super-hero-box {
+        background-color: rgba($color-white, .8);
+        font-size: 1.5rem;
+        text-align: center;
+        border-radius: 3px;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
+        transition: transform .3s;
+        position: relative;
+    
+        &__icon {
+            margin-bottom: .5rem;
+            position: absolute;
+            right: 2rem;
+            top: 0;
+    
+            @include respond(tab-port) {
+                margin-bottom: 0;
+            }
+        }
+
+        .super-hero-box__image {
+            width: 100%;
+            min-height: 20em;
+        }
+
+        .super-hero-tertiary {
+            padding: 1rem;
+            color: red;
+            font-size: 2em;
+            position: absolute;
+            bottom: 0;
+        }
+    
+        &:hover {
+            transform: translateY(-1.5rem) scale(1.03);
+        }
+    }
+}
