@@ -4,7 +4,9 @@
         cursor: pointer;
         display: inline-flex;
         align-items: center;
-        margin: 20px 10px 10px;
+        margin: 0 10px 10px;
+        transform: translateX(-2rem);
+
         &:hover {
             text-decoration: underline;
         }
@@ -17,7 +19,7 @@
     .super-hero-detail-section {
         .super-hero--image {
             img {
-                width: 70%;
+                width: 85%;
                 transform: translate(10px, 10px);
 
                 @media screen and (max-width: 767px) {

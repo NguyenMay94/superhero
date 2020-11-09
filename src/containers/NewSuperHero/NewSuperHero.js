@@ -116,25 +116,12 @@ const NewSuperHero = (props) => {
     
 
     const onFinish = () => {
-        console.log('save form');
         console.log(formRef.current.getFieldsValue());
     }
 
     const onReset = () => {
         formRef.current.resetFields();
     }
-
-    // const handleChange = info => {
-    //     if (info.file.status === 'uploading') {
-    //       return;
-    //     }
-    //     if (info.file.status === 'done') {
-    //       // Get this url from response in real world.
-    //       getBase64(info.file.originFileObj, imageUrl =>
-    //         setImageUrl(imageUrl)
-    //       );
-    //     }
-    // };
 
     const inputChangedHandler = (value, id) => {
         const updatedFormElement = updateObject(superForm[id], {
