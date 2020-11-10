@@ -28,26 +28,62 @@ const reducer = (state = initalState, action) => {
         isLoading: false,
       };
     case types.GET_SUPER_HEROS_BY_NAME:
+      console.log("action");
+      console.log(action);
+      console.log(state.superHeroListAll);
+      const superHerosByName = state.superHeroListAll.filter((item) => {
+        if (action.params.typeFilter === "favorite") {
+          return (
+            item.name.indexOf(action.params.name) >= 0 &&
+            item.isFavorite === true
+          );
+        }
+        return item.name.indexOf(action.params.name) >= 0;
+      });
+      console.log(superHerosByName);
+
       return {
         ...state,
-        superHerosDisplay: action.data,
+        superHerosDisplay: superHerosByName,
         isLoading: false,
       };
     case types.GET_SUPER_HEROS_BY_ID:
+      const superHerosById = state.superHeroListAll.filter((item) => {
+        if (action.params.typeFilter === "favorite") {
+          return item.id === action.params.id && item.isFavorite === true;
+        }
+        return item.id === action.params.id;
+      });
+
       return {
         ...state,
-        superHerosDisplay: action.data,
+        superHerosDisplay: superHerosById,
         isLoading: false,
       };
     case types.UPDATE_FAVORITE_STATUS:
+      const newSuperHeroListAll = state.superHeroListAll.map((item) => {
+        if (item.id !== action.params.id) {
+          return item;
+        }
+
+        return {
+          ...item,
+          isFavorite: action.params.isFavorite,
+        };
+      });
+
       return {
         ...state,
-        superHeroListAll: action.data,
+        superHeroListAll: newSuperHeroListAll,
       };
     case types.GET_SUPER_HERO_DETAIL:
+      const superHeroDetail = state.superHeroListAll.filter(
+        (item) => item.id === action.params.id,
+      );
+
       return {
         ...state,
-        superDetail: action.data,
+        superDetail: superHeroDetail,
         isLoading: false,
       };
     // case types.RESET_SUPER_HERO_DETAIL:
@@ -63,17 +99,7 @@ const reducer = (state = initalState, action) => {
     case types.ADD_NEW_SUPER_HERO:
       return {
         ...state,
-        isLoading: true,
-      };
-    case types.ADD_NEW_SUPER_HERO_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-      };
-    case types.ADD_NEW_SUPER_HERO_FAILED:
-      return {
-        ...state,
-        isLoading: false,
+        superHeroListAll: [action.params, ...state.superHeroListAll],
       };
     default:
       return state;

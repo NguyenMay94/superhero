@@ -5,29 +5,23 @@ import axios from "../../utils/axios";
  * ACTION SEARCH SUPER HERO LIST
  */
 
-export const searchSuperHeroById = (listAll, id, typeFilter) => {
-  const newSuperHeros = listAll.filter((item) => {
-    if (typeFilter === "favorite") {
-      return item.id === id && item.isFavorite === true;
-    }
-    return item.id === id;
-  });
+export const searchSuperHeroById = (id, typeFilter) => {
   return {
     type: types.GET_SUPER_HEROS_BY_ID,
-    data: newSuperHeros,
+    params: {
+      id,
+      typeFilter,
+    },
   };
 };
 
-export const searchSuperHeroByName = (listAll, name, typeFilter) => {
-  const newSuperHeros = listAll.filter((item) => {
-    if (typeFilter === "favorite") {
-      return item.name.indexOf(name) >= 0 && item.isFavorite === true;
-    }
-    return item.name.indexOf(name) >= 0;
-  });
+export const searchSuperHeroByName = (name, typeFilter) => {
   return {
     type: types.GET_SUPER_HEROS_BY_NAME,
-    data: newSuperHeros,
+    params: {
+      name,
+      typeFilter,
+    },
   };
 };
 
@@ -77,11 +71,12 @@ export const getAllSuperHero = () => {
  * ACTION GET SUPER HERO DETAIL
  */
 
-export const getSuperHeroDetail = (listAll, id) => {
-  const newSuperHero = listAll.filter((item) => item.id === id);
+export const getSuperHeroDetail = (id) => {
   return {
     type: types.GET_SUPER_HERO_DETAIL,
-    data: newSuperHero.length > 0 ? newSuperHero[0] : null,
+    params: {
+      id,
+    },
   };
 };
 
@@ -95,21 +90,13 @@ export const getSuperHeroDetail = (listAll, id) => {
  * ACTION UPDATE SUPER HERO FAVORITE
  */
 
-export const updateFavoriteStatus = (id, isFavorite, listAll) => {
-  const newListAll = listAll.map((item) => {
-    if (item.id !== id) {
-      return item;
-    }
-
-    return {
-      ...item,
-      isFavorite,
-    };
-  });
-
+export const updateFavoriteStatus = (id, isFavorite) => {
   return {
     type: types.UPDATE_FAVORITE_STATUS,
-    data: newListAll,
+    params: {
+      id,
+      isFavorite,
+    },
   };
 };
 
@@ -123,15 +110,16 @@ export const resetFavoritList = () => {
  * ACTION ADD NEW SUPER HERO
  */
 
-export const startAddNewSuperHero = () => {
+export const addNewSuperHero = (params) => {
   return {
     type: types.ADD_NEW_SUPER_HERO,
+    params,
   };
 };
 
-export const addNewSuperHero = (params, callback) => {
+export const submitDataNewSuperHero = (params, callback) => {
   return (dispatch) => {
-    dispatch(startAddNewSuperHero());
+    dispatch(addNewSuperHero(params));
     callback();
   };
 };

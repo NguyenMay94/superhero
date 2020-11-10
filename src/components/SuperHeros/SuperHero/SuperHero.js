@@ -6,11 +6,12 @@ const SuperHero = (props) => {
   const history = useHistory();
   const { superHero, updateStatusFavorite } = props;
   const {
-    images: { md, xs },
+    images: { md },
     biography,
     id,
+    isFavorite,
   } = superHero;
-  const [isLike, setIsLike] = useState(false);
+  const [isLike, setIsLike] = useState(isFavorite ? true : false);
 
   const onHeart = (event) => {
     event.preventDefault();

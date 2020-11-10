@@ -20,9 +20,9 @@ const Home = (props) => {
 
   useEffect(() => {
     if (typeSearch === "name") {
-      dispatch(searchSuperHeroByName(superHeroListAll, textSearch, typeFilter));
+      dispatch(searchSuperHeroByName(textSearch, typeFilter));
     } else {
-      dispatch(searchSuperHeroById(superHeroListAll, textSearch, typeFilter));
+      dispatch(searchSuperHeroById(textSearch, typeFilter));
     }
   }, [dispatch, textSearch, typeFilter, superHeroListAll]);
 
@@ -40,16 +40,13 @@ const Home = (props) => {
 
   const onSearchSuperHero = (value) => {
     if (typeSearch === "name") {
-      searchSuperHeroByName(superHeroListAll, value, typeFilter);
+      searchSuperHeroByName(value, typeFilter);
     } else {
-      searchSuperHeroById(superHeroListAll, value, typeFilter);
+      searchSuperHeroById(value, typeFilter);
     }
 
     setTextSearch(value);
   };
-
-  console.log("-----------------------------");
-  console.log(superHeroListAll);
 
   return (
     <Spin spinning={isLoading}>

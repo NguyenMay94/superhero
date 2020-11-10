@@ -11,7 +11,6 @@ const ContentRouter = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllSuperHero());
-    console.log("reload list all");
   }, [dispatch]);
   return (
     <Switch>

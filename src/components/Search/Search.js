@@ -1,8 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { Input, Select } from "antd";
-import { useDispatch } from "react-redux";
-
-import { searchSuperHero } from "../../redux/actions/action";
 import "../../asset/sass/components/search.scss";
 
 const { Option } = Select;

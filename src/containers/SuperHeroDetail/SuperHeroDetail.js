@@ -10,14 +10,12 @@ const SuperHeroDetail = (props) => {
   const params = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
-  console.log(history);
 
   const isLoading = useSelector((state) => state.isLoading);
   const superDetail = useSelector((state) => state.superDetail);
   const superHeroListAll = useSelector((state) => state.superHeroListAll);
 
   useEffect(() => {
-    console.log(params.id);
     dispatch(getSuperHeroDetail(superHeroListAll, +params.id));
     return () => {
       //dispatch(resetSuperDetail());
