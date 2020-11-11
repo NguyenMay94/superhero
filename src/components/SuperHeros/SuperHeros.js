@@ -13,7 +13,7 @@ const SuperHeros = (props) => {
         />
       ))
     ) : (
-      <p className="text-center">Can't not find any data</p>
+      <p className="text-center message-error">Can't not find any data</p>
     );
   return <div className="row super-hero-list">{listSupers}</div>;
 };

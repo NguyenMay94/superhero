@@ -2,6 +2,11 @@
 @import '../abstracts/mixins.scss';
 .super-hero-box-section {
     margin-bottom: 2rem;
+
+    .message-error {
+        width: 100%;
+    }
+
     .super-hero-box {
         background-color: rgba($color-white, .8);
         font-size: 1.5rem;

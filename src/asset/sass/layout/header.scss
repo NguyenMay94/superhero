@@ -70,6 +70,18 @@
                 display: flex;
                 align-items: center;
                 width: 110px;
+                padding-left: 3.5rem;
+
+                &::before {
+                    content: "";
+                    width: 2rem;
+                    height: 2rem;
+                    background-image: url(../../image/filter.svg);
+                    background-size: cover;
+                    background-position: center;
+                    position: absolute;
+                    left: 6px;
+                }
             }
         }
     }
