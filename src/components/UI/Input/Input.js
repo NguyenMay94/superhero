@@ -12,6 +12,9 @@ const Input = (props) => {
     value,
     changed,
   } = props;
+  console.log(inValid);
+  console.log(shouldValidate);
+  console.log(touched);
   const inValidClass = inValid && shouldValidate && touched ? "invalid" : "";
 
   const renderElement = () => {

@@ -16,7 +16,7 @@ const SuperHeroDetail = (props) => {
   const superHeroListAll = useSelector((state) => state.superHeroListAll);
 
   useEffect(() => {
-    dispatch(getSuperHeroDetail(superHeroListAll, +params.id));
+    dispatch(getSuperHeroDetail(+params.id));
     return () => {
       //dispatch(resetSuperDetail());
     };

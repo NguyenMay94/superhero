@@ -28,18 +28,25 @@ const reducer = (state = initalState, action) => {
         isLoading: false,
       };
     case types.GET_SUPER_HEROS_BY_NAME:
-      console.log("action");
       console.log(action);
-      console.log(state.superHeroListAll);
       const superHerosByName = state.superHeroListAll.filter((item) => {
         if (action.params.typeFilter === "favorite") {
           return (
-            item.name.indexOf(action.params.name) >= 0 &&
+            (item.name.indexOf(action.params.name) >= 0 ||
+              (item.biography &&
+                item.biography.fullName &&
+                item.biography.fullName.indexOf(action.params.name) >= 0)) &&
             item.isFavorite === true
           );
         }
-        return item.name.indexOf(action.params.name) >= 0;
+        return (
+          item.name.indexOf(action.params.name) >= 0 ||
+          (item.biography &&
+            item.biography.fullName &&
+            item.biography.fullName.indexOf(action.params.name) >= 0)
+        );
       });
+
       console.log(superHerosByName);
 
       return {
@@ -50,9 +57,9 @@ const reducer = (state = initalState, action) => {
     case types.GET_SUPER_HEROS_BY_ID:
       const superHerosById = state.superHeroListAll.filter((item) => {
         if (action.params.typeFilter === "favorite") {
-          return item.id === action.params.id && item.isFavorite === true;
+          return item.id === +action.params.id && item.isFavorite === true;
         }
-        return item.id === action.params.id;
+        return item.id === +action.params.id;
       });
 
       return {
@@ -83,7 +90,7 @@ const reducer = (state = initalState, action) => {
 
       return {
         ...state,
-        superDetail: superHeroDetail,
+        superDetail: superHeroDetail[0],
         isLoading: false,
       };
     // case types.RESET_SUPER_HERO_DETAIL:

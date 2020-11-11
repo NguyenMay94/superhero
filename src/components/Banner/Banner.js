@@ -5,20 +5,13 @@ import { Select } from "antd";
 const { Option } = Select;
 
 const Banner = (props) => {
-  const {
-    updateFilter,
-    onSearchSuperHero,
-    typeSearch,
-    textSearch,
-    updateTypeSearch,
-  } = props;
+  const { updateFilter, onSearchSuperHero, typeSearch, textSearch } = props;
   return (
     <div className="section-header--banner">
       <Search
         onSearchSuperHero={onSearchSuperHero}
         typeSearch={typeSearch}
         textSearch={textSearch}
-        updateTypeSearch={updateTypeSearch}
       />
       <Select
         defaultValue="all"

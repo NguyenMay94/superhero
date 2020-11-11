@@ -24,7 +24,7 @@ const Home = (props) => {
     } else {
       dispatch(searchSuperHeroById(textSearch, typeFilter));
     }
-  }, [dispatch, textSearch, typeFilter, superHeroListAll]);
+  }, [dispatch, typeSearch, textSearch, typeFilter, superHeroListAll]);
 
   const updateFilter = (value) => {
     setTypeFilter(value);
@@ -34,18 +34,15 @@ const Home = (props) => {
     dispatch(updateFavoriteStatus(id, isFavorite, superHeroListAll));
   };
 
-  const updateTypeSearch = (type) => {
-    setTypeSearch(type);
-  };
-
-  const onSearchSuperHero = (value) => {
-    if (typeSearch === "name") {
+  const onSearchSuperHero = (value, type) => {
+    if (type === "name") {
       searchSuperHeroByName(value, typeFilter);
     } else {
       searchSuperHeroById(value, typeFilter);
     }
 
     setTextSearch(value);
+    setTypeSearch(type);
   };
 
   return (
@@ -56,7 +53,6 @@ const Home = (props) => {
           onSearchSuperHero={onSearchSuperHero}
           typeSearch={typeSearch}
           textSearch={textSearch}
-          updateTypeSearch={updateTypeSearch}
         />
         <SuperHeros
           superHeroList={superHerosDisplay}

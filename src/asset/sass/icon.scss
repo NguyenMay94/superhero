@@ -445,8 +445,8 @@
 }
 
 .icon {
-  width: 4rem;
-  height: 4rem;
+  width: 3rem;
+  height: 3rem;
   display: inline-block;
   background-position: center;
   background-size: cover;
@@ -455,6 +455,10 @@
 
 .icon-unlike {
   background-image: url(../image/unlike.svg);
+
+  &:hover {
+    background-image: url(../image/like.svg);
+  }
 }
 
 .icon-like {

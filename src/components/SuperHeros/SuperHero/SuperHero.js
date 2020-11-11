@@ -10,6 +10,7 @@ const SuperHero = (props) => {
     biography,
     id,
     isFavorite,
+    name,
   } = superHero;
   const [isLike, setIsLike] = useState(isFavorite ? true : false);
 
@@ -26,22 +27,22 @@ const SuperHero = (props) => {
   };
 
   return (
-    <div className="col-1-of-4 super-hero-box-section">
+    <div className="col-1-of-5 super-hero-box-section">
       <div className="super-hero-box" onClick={() => onClickSuperHero(id)}>
-        <i
-          className={`super-hero-box__icon icon ${
-            isLike ? "icon-like" : "icon-unlike"
-          }`}
-          onClick={(event) => onHeart(event)}
-        />
+        <span className="super-hero-box__icon">
+          <i
+            className={`icon ${isLike ? "icon-like" : "icon-unlike"}`}
+            onClick={(event) => onHeart(event)}
+          />
+        </span>
         <img
           src={md}
           className="super-hero-box__image"
           alt={biography.fullName}
         />
-        <h3 className="super-hero-tertiary u-margin-bottom-small">
-          {biography.fullName}
-        </h3>
+        <h4 className="super-hero-tertiary u-margin-bottom-small">
+          {name || biography.fullName}
+        </h4>
       </div>
     </div>
   );
