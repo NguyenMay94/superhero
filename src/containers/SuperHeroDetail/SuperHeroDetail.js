@@ -17,9 +17,6 @@ const SuperHeroDetail = (props) => {
 
   useEffect(() => {
     dispatch(getSuperHeroDetail(+params.id));
-    return () => {
-      //dispatch(resetSuperDetail());
-    };
   }, [dispatch, params, superHeroListAll]);
 
   const onClickPrevious = () => {

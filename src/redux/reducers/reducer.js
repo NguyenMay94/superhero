@@ -95,16 +95,6 @@ const reducer = (state = initalState, action) => {
         superDetail: superHeroDetail[0],
         isLoading: false,
       };
-    // case types.RESET_SUPER_HERO_DETAIL:
-    //   return {
-    //     ...state,
-    //     superDetail: null,
-    //   };
-    // case types.RESET_FAVORITE_LIST:
-    //   return {
-    //     ...state,
-    //     superHeroFavoriteList: [],
-    //   };
     case types.ADD_NEW_SUPER_HERO:
       return {
         ...state,
