@@ -2,23 +2,34 @@
 @import '../abstracts/mixins.scss';
 .super-hero-box-section {
     margin-bottom: 2rem;
+
+    .message-error {
+        width: 100%;
+    }
+
     .super-hero-box {
         background-color: rgba($color-white, .8);
         font-size: 1.5rem;
         text-align: center;
-        border-radius: 3px;
+        border-radius: 3%;
         box-shadow: 0 1.5rem 4rem rgba($color-black, .15);
         transition: transform .3s;
         position: relative;
+        overflow: hidden;
+        cursor: pointer;
     
         &__icon {
-            margin-bottom: .5rem;
             position: absolute;
-            right: 2rem;
-            top: 0;
-    
-            @include respond(tab-port) {
-                margin-bottom: 0;
+            right: 1rem;
+            top: -1px;
+            padding: 6px;
+            background: #ffff;
+            cursor: auto;
+            -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 100% 100%, 50% 85%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0%, 100% 100%, 100% 100%, 50% 85%, 0% 100%);
+
+            .icon {
+                cursor: pointer;
             }
         }
 
@@ -30,13 +41,11 @@
         .super-hero-tertiary {
             padding: 1rem;
             color: red;
-            font-size: 2em;
-            position: absolute;
-            bottom: 0;
         }
     
         &:hover {
-            transform: translateY(-1.5rem) scale(1.03);
+            // transform: translateY(-0.5rem);
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
     }
 }

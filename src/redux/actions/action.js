@@ -1,126 +1,132 @@
-import * as types from './actionTypes';
-import axios from '../../utils/axios';
+import * as types from "./actionTypes";
+import axios from "../../utils/axios";
 
 /**
  * ACTION SEARCH SUPER HERO LIST
-*/
+ */
 
-export const startSearch = () => {
-    return {
-        type: types.SEARCH_SUPER_HERO,
-    }
-}
+export const getSuperHeros = () => {
+  return {
+    type: types.GET_SUPER_HEROS,
+  };
+};
 
-export const searchSuperHeroSuccess = (data) => {
-    return {
-        type: types.SEARCH_SUPER_HERO_SUCCESS,
-        data
-    }
-}
+export const searchSuperHeroById = (id, typeFilter) => {
+  return {
+    type: types.GET_SUPER_HEROS_BY_ID,
+    params: {
+      id,
+      typeFilter,
+    },
+  };
+};
 
-export const searchSuperHeroFailt = (error) => {
-    return {
-        type: types.SEARCH_SUPER_HERO_FAILED,
-        error
-    }
-}
+export const getSuperHeroByName = (name, typeFilter) => {
+  return {
+    type: types.GET_SUPER_HEROS_BY_NAME,
+    params: {
+      name,
+      typeFilter,
+    },
+  };
+};
 
-export const searchSuperHero = (param) => {
-    return dispatch => {
-        dispatch(startSearch());
-        const urlRequest = param.type === 'name' ? '/search': '';
-        axios.get(`${urlRequest}/${param.value}`).then(response => {
-            if(response.data.response === "success") {
-                const newData = response.data.results? response.data.results: [response.data];
-                dispatch(searchSuperHeroSuccess(newData));
-                dispatch(resetFavoritList())
-            } else {
-                dispatch(searchSuperHeroFailt(response.data));
-            }
-            
-        }).catch(error => {
-            dispatch(searchSuperHeroFailt(error));
-        })
-    }
-}
+export const searchSuperHeroByName = (name, typeFilter) => {
+  return (dispatch) => {
+    dispatch(getSuperHeros());
+    dispatch(getSuperHeroByName(name, typeFilter));
+  };
+};
 
-export const startGetSuperDetail = () => {
-    return {
-        type: types.SUPER_HERO_DETAIL,
-    }
-}
+/**
+ * ACTION SEARCH SUPER HERO LIST
+ */
 
-export const getSuperDetailSuccess = (data) => {
-    return {
-        type: types.SUPER_HERO_DETAIL_SUCCESS,
-        data
-    }
-}
+export const startGetAllSuperHeros = () => {
+  return {
+    type: types.GET_ALL_SUPER_HEROS,
+  };
+};
 
-export const getSuperDetailFailt = (error) => {
-    return {
-        type: types.SUPER_HERO_DETAIL_FAILT,
-        error
-    }
-}
+export const getAllSuperHerosSuccess = (data) => {
+  return {
+    type: types.GET_ALL_SUPER_HEROS_SUCCESS,
+    data,
+  };
+};
+
+export const getAllSuperHerosFailt = (error) => {
+  return {
+    type: types.GET_ALL_SUPER_HEROS_FAILED,
+    error,
+  };
+};
+
+export const getAllSuperHero = () => {
+  return (dispatch) => {
+    dispatch(startGetAllSuperHeros());
+    axios
+      .get("all.json")
+      .then((response) => {
+        if (response.status === 200) {
+          dispatch(getAllSuperHerosSuccess(response.data || []));
+        } else {
+          dispatch(getAllSuperHerosFailt(response.statusText));
+        }
+      })
+      .catch((error) => {
+        dispatch(getAllSuperHerosFailt(error));
+      });
+  };
+};
 
 /**
  * ACTION GET SUPER HERO DETAIL
-*/
+ */
 
-export const getSuperDetail = (id) => {
-    return dispatch => {
-        dispatch(startGetSuperDetail());
-        axios.get(`/${id}`).then(response => {
-            if(response.data.response === "success") {
-                const newData = response.data;
-                dispatch(getSuperDetailSuccess(newData));
-            } else {
-                dispatch(getSuperDetailFailt(response.data));
-            }
-        }).catch(error => {
-            dispatch(getSuperDetailFailt(error));
-        })
-    }
-}
-
-export const resetSuperDetail = () => {
-    return {
-        type: types.RESET_SUPER_HERO_DETAIL,
-    }
-}
+export const getSuperHeroDetail = (id) => {
+  return {
+    type: types.GET_SUPER_HERO_DETAIL,
+    params: {
+      id,
+    },
+  };
+};
 
 /**
  * ACTION UPDATE SUPER HERO FAVORITE
-*/
+ */
 
-export const updateFavoritList = (data) => {
-    return {
-        type: types.UPDATE_FAVORITE_LIST,
-        data
-    }
-}
-
+export const updateFavoriteStatus = (id, isFavorite) => {
+  return {
+    type: types.UPDATE_FAVORITE_STATUS,
+    params: {
+      id,
+      isFavorite,
+    },
+  };
+};
 
 export const resetFavoritList = () => {
-    return {
-        type: types.RESET_FAVORITE_LIST,
-    }
-}
+  return {
+    type: types.RESET_FAVORITE_LIST,
+  };
+};
 
 /**
  * ACTION ADD NEW SUPER HERO
-*/
+ */
 
-export const startAddNewSuperHero = () => {
-    return {
-        type: types.ADD_NEW_SUPER_HERO
-    }
-}
+export const addNewSuperHero = (params) => {
+  return {
+    type: types.ADD_NEW_SUPER_HERO,
+    params,
+  };
+};
 
-export const addNewSuperHero = (params, callback) => {
-    return dispatch => {
-        dispatch(startAddNewSuperHero());
-        callback();
-    }
-}
+export const submitDataNewSuperHero = (params, callback) => {
+  return (dispatch) => {
+    dispatch(addNewSuperHero(params));
+    callback();
+  };
+};

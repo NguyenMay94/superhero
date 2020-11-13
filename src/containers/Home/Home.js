@@ -1,51 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import { Spin } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
-import { searchSuperHero, updateFavoritList } from '../../redux/actions/action';
-import Banner from '../../components/Banner/Banner';
-import SuperHeros from '../../components/SuperHeros/SuperHeros';
+import React, { useEffect, useState } from "react";
+import { Spin } from "antd";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  updateFavoriteStatus,
+  searchSuperHeroById,
+  searchSuperHeroByName,
+} from "../../redux/actions/action";
+import Banner from "../../components/Banner/Banner";
+import SuperHeros from "../../components/SuperHeros/SuperHeros";
 
 const Home = (props) => {
-    const dispatch = useDispatch();
-    const isLoading = useSelector(state => state.isLoading);
-    const superHeroList = useSelector(state => state.superHeroList);
-    const superHeroFavoriteList = useSelector(state => state.superHeroFavoriteList);
-    const [typeFilter, setTypeFavorite] = useState("all");
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.isLoading);
+  const superHeroListAll = useSelector((state) => state.superHeroListAll);
+  const superHerosDisplay = useSelector((state) => state.superHerosDisplay);
+  const [typeFilter, setTypeFilter] = useState("all");
+  const [typeSearch, setTypeSearch] = useState("name");
+  const [textSearch, setTextSearch] = useState("");
 
-    useEffect(() => {
-        dispatch(searchSuperHero({type: "name", value: "batman"}));
-    }, [dispatch, ]);
+  useEffect(() => {
+    if (typeSearch === "name") {
+      dispatch(searchSuperHeroByName(textSearch, typeFilter));
+    } else {
+      dispatch(searchSuperHeroById(textSearch, typeFilter));
+    }
+  }, [dispatch, typeSearch, textSearch, typeFilter, superHeroListAll]);
 
-    const updateFavorite = (value) => {
-        setTypeFavorite(value);
+  const updateFilter = (value) => {
+    setTypeFilter(value);
+  };
+
+  const onUpdateStatusFavorite = (id, isFavorite) => {
+    dispatch(updateFavoriteStatus(id, isFavorite, superHeroListAll));
+  };
+
+  const onSearchSuperHero = (value, type) => {
+    if (type === "name") {
+      searchSuperHeroByName(value, typeFilter);
+    } else {
+      searchSuperHeroById(value, typeFilter);
     }
 
-    const addSuperFavoriteList = (superHero) => {
-        const newFavoriteList = [...superHeroFavoriteList]
-        newFavoriteList.push(superHero);
-        dispatch(updateFavoritList(newFavoriteList));
+    setTextSearch(value);
+    setTypeSearch(type);
+  };
 
-    }
-
-    const removeSuperFavoriteList = (superHeroId) => {
-        const newFavoriteList =  superHeroFavoriteList.filter(item => item.id !== superHeroId);
-        dispatch(updateFavoritList(newFavoriteList));
-    }
-
-    return (
-        <Spin spinning={isLoading}>
-            <div className='home-page'>
-                <Banner updateFavorite={updateFavorite}/>
-                <SuperHeros 
-                    superHeroList={typeFilter === "favorite" ? superHeroFavoriteList : superHeroList}
-                    removeFavorite={removeSuperFavoriteList}
-                    addFavorite={addSuperFavoriteList}
-                />
-            </div>
-        </Spin>
-    );
-}
-
-
+  return (
+    <Spin spinning={isLoading}>
+      <div className="home-page">
+        <Banner
+          updateFilter={updateFilter}
+          onSearchSuperHero={onSearchSuperHero}
+          typeSearch={typeSearch}
+          textSearch={textSearch}
+        />
+        <SuperHeros
+          superHeroList={superHerosDisplay}
+          isLoading={isLoading}
+          typeFilter={typeFilter}
+          updateStatusFavorite={onUpdateStatusFavorite}
+        />
+      </div>
+    </Spin>
+  );
+};
 
 export default Home;

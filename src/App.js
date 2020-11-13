@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import { Layout } from 'antd';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
-import reducer from './redux/reducers/reducer';
+import React, { Component } from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Layout } from "antd";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import { createStore, applyMiddleware, compose } from "redux";
+import reducer from "./redux/reducers/reducer";
 
-import Header from './components/Navigation/Navigation';
-import Home from './containers/Home';
-import NewSuperHero from './containers/NewSuperHero';
-import SuperHeroDetail from './containers/SuperHeroDetail';
+import Header from "./components/Navigation/Navigation";
+import ContentRouter from "./containers/ContentRouter";
 
 const { Content, Footer } = Layout;
 
@@ -22,7 +20,6 @@ const enhancer = composeEnhancers(
 const store = createStore(reducer, enhancer);
 
 class App extends Component {
-
   render() {
     return (
       <Provider store={store}>
@@ -30,13 +27,11 @@ class App extends Component {
           <Layout className="layout">
             <Header />
             <Content className="container">
-              <Switch>
-                <Route exact={true} path="/new" component={NewSuperHero}></Route>
-                <Route exact={true} path="/detail/:id" component={SuperHeroDetail}></Route>
-                <Route exact={true} path="/" component={Home}></Route>
-              </Switch>
+              <ContentRouter />
             </Content>
-            <Footer style={{ textAlign: 'center' }}>Super Hero ©2020 Created by May Nguyen</Footer>
+            <Footer style={{ textAlign: "center" }}>
+              Super Hero ©2020 Created by May Nguyen
+            </Footer>
           </Layout>
         </Router>
       </Provider>

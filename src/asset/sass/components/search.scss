@@ -8,13 +8,13 @@
     }
 
     &--input {
-        width: 75% !important;
+        width: calc(100% - 90px) !important;
         input {
             height: 40px;
         }
     }
 
     &--select {
-        width: 25% !important;
+        width: 86px !important;
     }
 }
