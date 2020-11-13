@@ -198,7 +198,6 @@ const NewSuperHero = (props) => {
       valid: checkValidity(value, superForm[id].validation),
       touched: true,
     });
-    console.log(updatedFormElement);
     const updatedSuperForm = updateObject(superForm, {
       [id]: updatedFormElement,
     });
@@ -207,7 +206,6 @@ const NewSuperHero = (props) => {
     for (let inputIdentifier in updatedSuperForm) {
       formIsValid = updatedSuperForm[inputIdentifier].valid && formIsValid;
     }
-    console.log(updatedSuperForm);
     setSuperForm(updatedSuperForm);
     setFormIsValid(formIsValid);
   };
@@ -219,8 +217,6 @@ const NewSuperHero = (props) => {
       ...superForm[key],
     });
   }
-
-  console.log(formElementsArray);
 
   return (
     <Spin spinning={isLoading}>
