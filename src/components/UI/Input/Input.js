@@ -4,7 +4,7 @@ import "../../../asset/sass/components/input.scss";
 const Input = (props) => {
   const {
     type,
-    inValid,
+    invalid,
     touched,
     shouldValidate,
     className,
@@ -12,11 +12,7 @@ const Input = (props) => {
     value,
     changed,
   } = props;
-  console.log(inValid);
-  console.log(shouldValidate);
-  console.log(touched);
-  const inValidClass = inValid && shouldValidate && touched ? "invalid" : "";
-
+  const inValidClass = invalid && shouldValidate && touched ? "invalid" : "";
   const renderElement = () => {
     switch (type) {
       case "textarea":
@@ -56,9 +52,14 @@ const Input = (props) => {
 
   return (
     <div className={`input-section ${inValidClass}`}>
-      <label className="label">{props.label}</label>
+      <label className="label">
+        {props.label}
+        {shouldValidate && shouldValidate.required ? <sup>*</sup> : ""}
+      </label>
       {renderElement()}
-      {inValidClass ? <p className="message-invalid">{props.message}</p> : null}
+      {inValidClass ? (
+        <p className="message-invalid">This field is madatory</p>
+      ) : null}
     </div>
   );
 };

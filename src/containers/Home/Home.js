@@ -56,6 +56,8 @@ const Home = (props) => {
         />
         <SuperHeros
           superHeroList={superHerosDisplay}
+          isLoading={isLoading}
+          typeFilter={typeFilter}
           updateStatusFavorite={onUpdateStatusFavorite}
         />
       </div>

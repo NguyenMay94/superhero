@@ -198,6 +198,7 @@ const NewSuperHero = (props) => {
       valid: checkValidity(value, superForm[id].validation),
       touched: true,
     });
+    console.log(updatedFormElement);
     const updatedSuperForm = updateObject(superForm, {
       [id]: updatedFormElement,
     });
@@ -206,7 +207,7 @@ const NewSuperHero = (props) => {
     for (let inputIdentifier in updatedSuperForm) {
       formIsValid = updatedSuperForm[inputIdentifier].valid && formIsValid;
     }
-
+    console.log(updatedSuperForm);
     setSuperForm(updatedSuperForm);
     setFormIsValid(formIsValid);
   };
@@ -219,18 +220,14 @@ const NewSuperHero = (props) => {
     });
   }
 
+  console.log(formElementsArray);
+
   return (
     <Spin spinning={isLoading}>
       <div className="create-new-page">
         <div className="row">
           <h1 className="title">Create new super hero</h1>
           <div>
-            {/* <div className="input-avatar">
-                      <label>
-                        <span>upload image</span>
-                        <input type="file" id="form-avatar" name="avatar" accept="image/png, image/jpeg, image/gif" />
-                      </label>
-                    </div> */}
             {formElementsArray.map((field) => (
               <Input
                 key={field.id}

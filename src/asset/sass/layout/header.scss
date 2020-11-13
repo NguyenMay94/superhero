@@ -69,7 +69,7 @@
                 height: 100%;
                 display: flex;
                 align-items: center;
-                width: 110px;
+                width: 125px;
                 padding-left: 3.5rem;
 
                 &::before {
@@ -84,6 +84,14 @@
                 }
             }
         }
+    }
+
+    .ant-menu.ant-menu-dark .ant-menu-item-selected, .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected {
+        background-color: transparent;
+    }
+
+    .ant-menu-dark.ant-menu-horizontal > .ant-menu-item:hover {
+        background-color: #1890ff;
     }
     
 }

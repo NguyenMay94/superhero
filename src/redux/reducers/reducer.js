@@ -27,8 +27,12 @@ const reducer = (state = initalState, action) => {
         error: action.error,
         isLoading: false,
       };
+    case types.GET_SUPER_HEROS:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case types.GET_SUPER_HEROS_BY_NAME:
-      console.log(action);
       const superHerosByName = state.superHeroListAll.filter((item) => {
         if (action.params.typeFilter === "favorite") {
           return (
@@ -46,8 +50,6 @@ const reducer = (state = initalState, action) => {
             item.biography.fullName.indexOf(action.params.name) >= 0)
         );
       });
-
-      console.log(superHerosByName);
 
       return {
         ...state,

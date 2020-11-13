@@ -29,10 +29,10 @@ const SuperHeroDetail = (props) => {
   return (
     <Spin spinning={isLoading}>
       <div className="super-hero-detail row">
-        <span className="previous-link" onClick={onClickPrevious}>
+        <div className="previous-link" onClick={onClickPrevious}>
           <i className="icon-arrow-left icon" />
-          previous page
-        </span>
+          <p>previous page</p>
+        </div>
         {superDetail && (
           <Row className="super-hero-detail-section">
             <Col xs={24} md={8} className="super-hero--image">
@@ -41,7 +41,6 @@ const SuperHeroDetail = (props) => {
             <Col xs={24} md={12} className="super-hero--content">
               <h1 className="title">{superDetail.name}</h1>
               <div>
-                <p>Detail Description:</p>
                 <Row>
                   <Col xs={8} className="col-title">
                     full name:{" "}

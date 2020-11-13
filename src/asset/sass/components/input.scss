@@ -7,17 +7,24 @@
         font-weight: bold;
         display: block;
         margin-bottom: 8px;
+
+        sup {
+            color: red;
+            padding-left: 3px;
+        }
     }
     
     .input {
         outline: none;
-        border: 1px solid #ccc;
+        border: 1px solid rgba(204,204,204,0.5);
+         border-radius: 5px;
         background-color: white;
         font: inherit;
         padding: 6px 10px;
         display: block;
         width: 100%;
         box-sizing: border-box;
+        box-shadow: rgba(50, 50, 93, 0.1) 0px 50px 90px -1px, rgba(0, 0, 0, 0.1) 0px 30px 60px -30px, rgba(10, 37, 64, 0.1) 0px -2px 6px 0px inset;
     }
     
     .input:focus {
@@ -26,6 +33,10 @@
     
     .invalid {
         border: 1px solid red;
-        background-color: #FDA49A;
+    }
+
+    .message-invalid {
+        color: red;
+        margin: 0;
     }
 }

@@ -5,6 +5,12 @@ import axios from "../../utils/axios";
  * ACTION SEARCH SUPER HERO LIST
  */
 
+export const getSuperHeros = () => {
+  return {
+    type: types.GET_SUPER_HEROS,
+  };
+};
+
 export const searchSuperHeroById = (id, typeFilter) => {
   return {
     type: types.GET_SUPER_HEROS_BY_ID,
@@ -15,13 +21,20 @@ export const searchSuperHeroById = (id, typeFilter) => {
   };
 };
 
-export const searchSuperHeroByName = (name, typeFilter) => {
+export const getSuperHeroByName = (name, typeFilter) => {
   return {
     type: types.GET_SUPER_HEROS_BY_NAME,
     params: {
       name,
       typeFilter,
     },
+  };
+};
+
+export const searchSuperHeroByName = (name, typeFilter) => {
+  return (dispatch) => {
+    dispatch(getSuperHeros());
+    dispatch(getSuperHeroByName(name, typeFilter));
   };
 };
 
@@ -79,12 +92,6 @@ export const getSuperHeroDetail = (id) => {
     },
   };
 };
-
-// export const resetSuperDetail = () => {
-//   return {
-//     type: types.RESET_SUPER_HERO_DETAIL,
-//   };
-// };
 
 /**
  * ACTION UPDATE SUPER HERO FAVORITE
